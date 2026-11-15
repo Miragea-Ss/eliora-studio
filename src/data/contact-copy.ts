@@ -54,11 +54,11 @@ export const contactCopy: Record<AtelierLang, ContactCopy> = {
     successLead:
       'Your message was sent to Miragea · Eliora.',
     successPoints: [
-      'No automatic confirmation email is sent.',
-      'Miragea · Eliora (principal) will reply within 3 business days.',
+      'We will send an automatic confirmation email that we received your inquiry.',
+      'A personal reply will follow within 3 business days.',
     ],
     formAutoreplyHint:
-      'No automatic confirmation email is sent. Personal reply within 3 business days.',
+      'We will send an automatic confirmation email that we received your inquiry. A personal reply will follow within 3 business days.',
     backHome: '← Back to Atelier home',
     fields: {
       name: 'Your name',
@@ -108,11 +108,11 @@ export const contactCopy: Record<AtelierLang, ContactCopy> = {
     successLead:
       'お問い合わせを送信しました。',
     successPoints: [
-      '自動返信メールは送信されません。',
-      '内容を確認のうえ、3営業日以内にMiragea · Eliora（担当）よりご記入のメールアドレスへ返信します。',
+      'お問い合わせ受付の自動返信メールをお送りします。',
+      '内容の本返信は3営業日以内にご連絡します。',
     ],
     formAutoreplyHint:
-      '自動返信メールは送信されません。担当からの返信は3営業日以内です。',
+      'お問い合わせ受付の自動返信メールをお送りします。内容の本返信は3営業日以内にご連絡します。',
     backHome: '← アトリエホームへ',
     fields: {
       name: 'お名前',
@@ -160,10 +160,10 @@ export const contactCopy: Record<AtelierLang, ContactCopy> = {
     successTitle: '咨询已受理',
     successLead: '您的咨询已成功提交。',
     successPoints: [
-      '不会发送自动确认邮件。',
-      'Miragea · Eliora（负责人）将在 3 个工作日内回复您填写的邮箱。',
+      '我们会发送自动确认邮件，告知您咨询已收到。',
+      '正式回复将在 3 个工作日内发出。',
     ],
-    formAutoreplyHint: '提交后不会发送自动确认邮件。人工回复将在 3 个工作日内发出。',
+    formAutoreplyHint: '我们会发送自动确认邮件，告知您咨询已收到。正式回复将在 3 个工作日内发出。',
     backHome: '← 返回工坊首页',
     fields: {
       name: '姓名',
