@@ -301,3 +301,17 @@ footer .mono { font-family: var(--font-mono); letter-spacing: .14em; }
 .dl-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
 .dl { display: inline-block; font-family: var(--font-mono); font-size: .75rem; letter-spacing: .12em; color: var(--cyan-ink); border: 1px solid var(--cyan-line); border-radius: .5rem; padding: .6rem 1rem; transition: color .3s, border-color .3s, box-shadow .3s; }
 .dl:hover { color: #fff; border-color: rgba(34,211,238,.7); box-shadow: 0 0 24px rgba(34,211,238,.25); }
+
+footer .legal-link { margin-top: .15rem; }
+footer .legal-link a { color: var(--ink-3); }
+footer .legal-link a:hover { color: #fff; }
+.row .t a,
+.row .d a {
+  color: inherit;
+  border-bottom: 1px solid var(--line);
+}
+.row .t a:hover,
+.row .d a:hover {
+  color: #fff;
+  border-bottom-color: var(--rose);
+}

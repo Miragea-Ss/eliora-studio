@@ -1,0 +1,79 @@
+---
+import ElioraDocLayout from '../../../site-layouts/ElioraDocLayout.astro';
+import { downloadPages } from '../../../data/download-pages';
+
+export function getStaticPaths() {
+  return Object.keys(downloadPages).map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const page = slug ? downloadPages[slug] : undefined;
+if (!page) {
+  return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+---
+<ElioraDocLayout
+  title="ご購入ありがとうございました ｜ Eliora"
+  description={`${page.productName}のご購入ありがとうございます。ダウンロードのご案内です。`}
+  noindex={true}
+>
+  <header class="doc-hero">
+    <div class="crumb">
+      <a href="/">ELIORA</a><i>/</i><span class="cur">ダウンロード案内</span>
+    </div>
+    <h1 class="doc-title">ご購入ありがとうございました</h1>
+    <p class="doc-kicker">{page.productName}</p>
+    <p class="doc-lead">決済が完了しました。下の案内から、ファイルをお受け取りください。</p>
+    <p class="doc-lead">このページのアドレスは、購入された方のためのものです。第三者に伝えたり、公開したりしないでください。</p>
+  </header>
+
+  <article class="doc">
+    <div class="dl-items">
+      <p class="mono-id">INCLUDED</p>
+      <h2>お渡しするもの</h2>
+      <ul>
+        {page.items.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+
+    <div class="dl-notice">
+      <p class="mono-id">DOWNLOAD</p>
+      <h2>ダウンロードは決済確認後に有効になります</h2>
+      <p>ただいまファイルの準備を進めています。用意が整い次第、このページからお受け取りいただけるようになります。</p>
+      <p>ファイルが開かないとき、またはしばらく経っても表示されないときは、まず別のブラウザでお試しください。解消しない場合は、お支払いのメールアドレスと、購入した商品名を添えてご連絡ください。</p>
+    </div>
+
+    <section>
+      <h2>ご利用の前に</h2>
+      <ul>
+        <li>指示書はテキストです。画像を生成する機能は含まれません。</li>
+        <li>ワークフローは、お手元の PC の ComfyUI でローカル実行します。モデル・LoRA・カスタムノードは同梱していません。</li>
+        <li>結果は、お使いの環境とモデルによって変わります。</li>
+        <li>本文・ファイル・解説動画を、第三者に配布・転売・再販売・公開しないでください。</li>
+        <li>購入者向け解説動画は、購入された方だけがご覧いただけます。制作者本人が、指示書とワークフローの使い方を、順を追ってご案内します。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>無料サンプルについて</h2>
+      <p>購入前に試せる無料サンプル（指示書の簡易版、およびワークフローの「1段目」のみ）は、商品ページからもダウンロードできます。有料版とは内容が異なります。</p>
+      <p>商品ページ：<a href="https://eliora-studio.com/skills/">https://eliora-studio.com/skills/</a></p>
+    </section>
+
+    <section>
+      <h2>お支払いの確認</h2>
+      <p>決済の控えは、Stripe より、お支払い時のメールアドレスへ届きます。カード明細の表記は「ELIORA STUDIO」です。</p>
+      <p>表示価格はお支払い総額です。適格請求書（インボイス）は発行していません。</p>
+    </section>
+
+    <section>
+      <h2>お困りのとき</h2>
+      <p>ダウンロードできない、ファイルが開かないなどがありましたら、お問い合わせフォームまたはメールでご連絡ください。自動返信メールはお送りしていません。内容を確認のうえ、3営業日以内にご返信します。</p>
+      <ul>
+        <li>お問い合わせフォーム：<a href="https://eliora-studio.com/atelier/ja/contact/">https://eliora-studio.com/atelier/ja/contact/</a></li>
+        <li>メール：<a href="mailto:eliora.studio@outlook.com">eliora.studio@outlook.com</a></li>
+      </ul>
+      <p>返品・キャンセルについて：提供後の返品・返金は原則としてお受けできません。提供前（ご購入日から7日以内）の取消し、およびファイルの不具合などは、<a href="/legal/tokusho/">特定商取引法に基づく表記</a>の条件に従い、再提供または返金で対応します。</p>
+    </section>
+  </article>
+</ElioraDocLayout>

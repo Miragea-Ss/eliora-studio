@@ -1,0 +1,46 @@
+---
+// Shared chrome for Eliora legal / post-purchase pages. Matches /skills/ look.
+import '../styles/eliora-skills.css';
+import '../styles/eliora-legal.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const { title, description, canonical, noindex = false } = Astro.props;
+---
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+<title>{title}</title>
+<meta name="description" content={description} />
+{canonical && <link rel="canonical" href={canonical} />}
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/assets/brand/brand-glow.css" />
+</head>
+<body class="doc-body">
+
+<header class="chrome-logo">
+  <a href="/" aria-label="Eliora home"><span class="brand-moon-orb brand-moon-orb--eliora brand-moon-orb--strong"><span class="moon-glow" aria-hidden="true"></span><img class="brand-moon-logo" src="/assets/brand/eliora-logo-256.webp" alt="Eliora" width="256" height="256" decoding="async"></span></a>
+</header>
+<header class="chrome-lang"><span class="soon" title="近日対応">EN</span><span class="sep">/</span><a class="on" href="#">JP</a><span class="sep">/</span><span class="soon" title="近日対応">ZH</span></header>
+
+<main>
+<div class="wrap">
+  <slot />
+</div>
+</main>
+
+<footer>
+  <div class="mono">ELIORA ｜ 制作 <a href="https://x.com/Miragea_S">@Miragea_S</a></div>
+  <div><a href="/">Eliora</a> · <a href="https://miragea-ss.github.io/ja/">Miragea へ戻る</a></div>
+  <div class="legal-link"><a href="/legal/tokusho/">特定商取引法に基づく表記</a></div>
+</footer>
+</body>
+</html>
