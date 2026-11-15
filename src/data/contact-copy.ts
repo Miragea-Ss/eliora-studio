@@ -1,0 +1,194 @@
+import type { AtelierLang } from './atelier-copy';
+
+export interface ContactCopy {
+  meta: { title: string; description: string };
+  brandSubtitle: string;
+  badge: string;
+  title: string;
+  lead: string;
+  note: string;
+  offer: string;
+  successTitle: string;
+  successLead: string;
+  successPoints: string[];
+  formAutoreplyHint: string;
+  backHome: string;
+  fields: {
+    name: string;
+    namePlaceholder: string;
+    email: string;
+    emailPlaceholder: string;
+    company: string;
+    companyPlaceholder: string;
+    inquiryType: string;
+    message: string;
+    messagePlaceholder: string;
+    submit: string;
+    submitting: string;
+    submitError: string;
+    networkError: string;
+    required: string;
+  };
+  inquiryTypes: { value: string; label: string }[];
+  privacy: string;
+  formNotReady?: string;
+}
+
+export const contactCopy: Record<AtelierLang, ContactCopy> = {
+  en: {
+    meta: {
+      title: 'Project Inquiry | Miragea · Eliora',
+      description:
+        'Contact Miragea · Eliora for PoC, ComfyUI workflows, and enterprise automation. Fixed inquiry form with email reply.',
+    },
+    brandSubtitle: 'Project Inquiry',
+    badge: 'Business · PoC · Workflows',
+    title: 'Start a serious project conversation',
+    lead:
+      'Use this form for PoC, ComfyUI automation, workflow builds, and consulting. I reply to the email address you provide.',
+    note:
+      'Typical scope: reproducible pipelines, local bf16/fp16 stacks, API export, batch production — not one-off image requests.',
+    offer:
+      'Fixed package: Reproducible Pipeline Package (ComfyUI), $5,000 (excl. tax; Japanese consumption tax applies only to Japan-based clients), 10 business days. One reproducible workflow, input and output spec, and a runbook. One revision included. One-off image generation is out of scope.',
+    successTitle: 'Inquiry received',
+    successLead:
+      'Your message was sent to Miragea · Eliora.',
+    successPoints: [
+      'No automatic confirmation email is sent.',
+      'Miragea · Eliora (principal) will reply within 3 business days.',
+    ],
+    formAutoreplyHint:
+      'No automatic confirmation email is sent. Personal reply within 3 business days.',
+    backHome: '← Back to Atelier home',
+    fields: {
+      name: 'Your name',
+      namePlaceholder: 'e.g. Alex Chen',
+      email: 'Email (for reply)',
+      emailPlaceholder: 'you@company.com',
+      company: 'Company / organization (optional)',
+      companyPlaceholder: 'Studio, agency, in-house team…',
+      inquiryType: 'Inquiry type',
+      message: 'Project details',
+      messagePlaceholder:
+        'Goal, timeline, budget range, tech stack, deliverables. The more concrete, the faster I can scope.',
+      submit: 'Send inquiry',
+      submitting: 'Sending…',
+      submitError: 'Submission failed. Please try again in a moment.',
+      networkError: 'Network error. Check your connection and try again.',
+      required: 'Required',
+    },
+    inquiryTypes: [
+      { value: 'poc', label: 'Enterprise PoC / automation' },
+      { value: 'workflow', label: 'ComfyUI workflow build' },
+      { value: 'consulting', label: 'Consulting / advisory' },
+      { value: 'partnership', label: 'Partnership / media' },
+      { value: 'other', label: 'Other (describe below)' },
+    ],
+    privacy:
+      'Your email is used only to reply to this inquiry. No newsletter signup.',
+    formNotReady:
+      'The inquiry form is being configured. Please check back shortly or reach out via X @Miragea_S.',
+  },
+  ja: {
+    meta: {
+      title: 'お仕事のご相談 | Miragea · Eliora',
+      description:
+        '企業PoC・ComfyUI業務自動化・ワークフロー構築のお問い合わせ。お名前・メール・ご用件の固定フォーム。',
+    },
+    brandSubtitle: 'お仕事のご相談',
+    badge: '企業 · PoC · ワークフロー',
+    title: '本気の仕事依頼はこちら',
+    lead:
+      '企業向けPoC、ComfyUI業務自動化、ワークフロー構築、コンサルティングのご相談はこのフォームから。ご記入のメールアドレスへ返信します。',
+    note:
+      '対象例：再現性のあるパイプライン、ローカルbf16/fp16運用、API化、バッチ量産 — 単発画像生成の依頼ではありません。',
+    offer:
+      '定価: ComfyUI 再現パイプライン パッケージ、800,000円（税込880,000円）、納期10営業日。表示は税別価格。再現できるワークフロー1本、入出力の仕様、実行手順を納品する。修正1回を含む。単発の画像生成は対象外。',
+    successTitle: 'お問い合わせを受け付けました',
+    successLead:
+      'お問い合わせを送信しました。',
+    successPoints: [
+      '自動返信メールは送信されません。',
+      '内容を確認のうえ、3営業日以内にMiragea · Eliora（担当）よりご記入のメールアドレスへ返信します。',
+    ],
+    formAutoreplyHint:
+      '自動返信メールは送信されません。担当からの返信は3営業日以内です。',
+    backHome: '← アトリエホームへ',
+    fields: {
+      name: 'お名前',
+      namePlaceholder: '例：山田 太郎',
+      email: '連絡用メールアドレス',
+      emailPlaceholder: 'you@company.co.jp',
+      company: '会社名・組織名（任意）',
+      companyPlaceholder: '制作会社、事業部、スタジオ名など',
+      inquiryType: 'ご用件の種類',
+      message: 'ご用件の詳細',
+      messagePlaceholder:
+        '目的、希望納期、予算感、技術環境、成果物のイメージを具体的にご記入ください。',
+      submit: '送信する',
+      submitting: '送信中…',
+      submitError: '送信に失敗しました。しばらくして再度お試しください。',
+      networkError: 'ネットワークエラーです。接続を確認して再度お試しください。',
+      required: '必須',
+    },
+    inquiryTypes: [
+      { value: 'poc', label: '企業PoC・業務自動化' },
+      { value: 'workflow', label: 'ComfyUIワークフロー構築' },
+      { value: 'consulting', label: 'コンサルティング・顧問' },
+      { value: 'partnership', label: '提携・メディア・講演' },
+      { value: 'other', label: 'その他（下記に記載）' },
+    ],
+    privacy: 'メールアドレスは返信のみに使用します。ニュースレター登録はありません。',
+    formNotReady:
+      'お問い合わせフォームは現在設定中です。しばらくお待ちいただくか、X @Miragea_S までご連絡ください。',
+  },
+  zh: {
+    meta: {
+      title: '项目咨询 | Miragea · Eliora',
+      description:
+        '企业 PoC、ComfyUI 工作流、自动化咨询。固定格式：姓名、邮箱、需求详情，可邮件回复。',
+    },
+    brandSubtitle: '项目咨询',
+    badge: '企业 · PoC · 工作流',
+    title: '正式合作与项目咨询',
+    lead:
+      '企业 PoC、ComfyUI 自动化、工作流搭建、顾问咨询请用此表单。我会回复到你填写的邮箱。',
+    note:
+      '适合：可复现管线、本地 bf16/fp16、API 化、批量生产 — 非单张图片定制。',
+    offer:
+      '套餐：ComfyUI 可复现工作流套餐，价格面议（人民币标价，不含税；日本消费税仅适用于日本境内客户），10 个工作日。交付一条可复现工作流、输入输出规格和运行步骤。含 1 次修改。不含单张出图。',
+    successTitle: '咨询已受理',
+    successLead: '您的咨询已成功提交。',
+    successPoints: [
+      '不会发送自动确认邮件。',
+      'Miragea · Eliora（负责人）将在 3 个工作日内回复您填写的邮箱。',
+    ],
+    formAutoreplyHint: '提交后不会发送自动确认邮件。人工回复将在 3 个工作日内发出。',
+    backHome: '← 返回工坊首页',
+    fields: {
+      name: '姓名',
+      namePlaceholder: '例如：张三',
+      email: '联系邮箱（用于回复）',
+      emailPlaceholder: 'you@company.com',
+      company: '公司 / 组织（选填）',
+      companyPlaceholder: '工作室、企业部门等',
+      inquiryType: '咨询类型',
+      message: '需求详情',
+      messagePlaceholder: '目标、时间线、预算范围、技术栈、交付物 — 越具体越容易评估。',
+      submit: '提交咨询',
+      submitting: '提交中…',
+      submitError: '提交失败，请稍后再试。',
+      networkError: '网络错误，请检查连接后重试。',
+      required: '必填',
+    },
+    inquiryTypes: [
+      { value: 'poc', label: '企业 PoC / 自动化' },
+      { value: 'workflow', label: 'ComfyUI 工作流搭建' },
+      { value: 'consulting', label: '顾问咨询' },
+      { value: 'partnership', label: '合作 / 媒体' },
+      { value: 'other', label: '其他（请在下方说明）' },
+    ],
+    privacy: '邮箱仅用于回复本次咨询，不订阅邮件列表。',
+    formNotReady: '咨询表单正在配置中。请稍后再试，或通过 X @Miragea_S 联系。',
+  },
+};

@@ -1,0 +1,196 @@
+---
+import type { AtelierLang } from '../../data/atelier-copy';
+import { atelierHomeCopy } from '../../data/atelier-copy';
+import type { ContactCopy } from '../../data/contact-copy';
+import {
+  contactFormPostUrl,
+  contactFormNext,
+  contactFormPageUrl,
+  contactFormSubject,
+  getWeb3formsAccessKey,
+  CONTACT_FROM_NAME,
+  atelierContactPath,
+  isContactFormReady,
+} from '../../data/contact-config';
+import AtelierTopbar from './AtelierTopbar.astro';
+
+interface Props {
+  lang: AtelierLang;
+  copy: ContactCopy;
+}
+
+const { lang, copy } = Astro.props;
+const formReady = isContactFormReady();
+const postUrl = contactFormPostUrl();
+const nextUrl = contactFormNext(lang);
+const pageUrl = contactFormPageUrl(lang);
+const subject = contactFormSubject(lang);
+const accessKey = getWeb3formsAccessKey();
+const fromName = CONTACT_FROM_NAME;
+const homeCopy = atelierHomeCopy[lang];
+const homePath = `/atelier/${lang}/`;
+const nav = [
+  ...homeCopy.nav
+    .filter((item) => !item.href.includes('/contact/'))
+    .map((item) => ({
+      ...item,
+      href: item.href.startsWith('#') ? `${homePath}${item.href}` : item.href,
+    })),
+  { href: atelierContactPath(lang), label: lang === 'ja' ? 'お問い合わせ' : lang === 'zh' ? '联系' : 'Contact' },
+];
+---
+
+<div class="wrap">
+  <AtelierTopbar
+    lang={lang}
+    brandSubtitle={copy.brandSubtitle}
+    nav={nav}
+    regionTags={homeCopy.regionTags}
+    activeNav={atelierContactPath(lang)}
+  />
+
+  <main class="contact-page">
+    <section class="block contact-success-panel" id="contact-success" hidden aria-live="polite">
+      <span class="badge">{copy.badge}</span>
+      <h1 class="section-title">{copy.successTitle}</h1>
+      <p class="contact-lead">{copy.successLead}</p>
+      <ul class="contact-success-list">
+        {copy.successPoints.map((point) => (
+          <li>{point}</li>
+        ))}
+      </ul>
+      <a class="btn btn-secondary" href={homePath} style="margin-top:20px">
+        {copy.backHome}
+      </a>
+    </section>
+
+    <section class="block contact-section" id="contact-form-section">
+      <span class="badge">{copy.badge}</span>
+      <h1 class="section-title">{copy.title}</h1>
+      <p class="contact-lead">{copy.lead}</p>
+      <p class="contact-note">{copy.note}</p>
+      <p class="contact-note">{copy.offer}</p>
+
+      {
+        !formReady && copy.formNotReady ? (
+          <p class="contact-note contact-form-pending">{copy.formNotReady}</p>
+        ) : (
+          <form
+            class="contact-form"
+            id="contact-form"
+            action={postUrl}
+            method="POST"
+            accept-charset="UTF-8"
+          >
+            <input type="hidden" name="access_key" value={accessKey} />
+            <input type="hidden" name="subject" value={subject} />
+            <input type="hidden" name="from_name" value={fromName} />
+            <input type="hidden" name="redirect" value={nextUrl} />
+            <input type="hidden" name="locale" value={lang} />
+            <input
+              type="checkbox"
+              name="botcheck"
+              class="contact-honey"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+
+            <div class="form-row">
+              <label for="contact-name">
+                {copy.fields.name}
+                <span class="form-required">{copy.fields.required}</span>
+              </label>
+              <input
+                id="contact-name"
+                type="text"
+                name="name"
+                required
+                minlength="1"
+                maxlength="120"
+                placeholder={copy.fields.namePlaceholder}
+                autocomplete="name"
+              />
+            </div>
+
+            <div class="form-row">
+              <label for="contact-email">
+                {copy.fields.email}
+                <span class="form-required">{copy.fields.required}</span>
+              </label>
+              <input
+                id="contact-email"
+                type="email"
+                name="email"
+                required
+                maxlength="254"
+                placeholder={copy.fields.emailPlaceholder}
+                autocomplete="email"
+              />
+            </div>
+
+            <div class="form-row">
+              <label for="contact-company">{copy.fields.company}</label>
+              <input
+                id="contact-company"
+                type="text"
+                name="company"
+                maxlength="160"
+                placeholder={copy.fields.companyPlaceholder}
+                autocomplete="organization"
+              />
+            </div>
+
+            <div class="form-row">
+              <label for="contact-type">
+                {copy.fields.inquiryType}
+                <span class="form-required">{copy.fields.required}</span>
+              </label>
+              <select id="contact-type" name="inquiry_type" required>
+                {
+                  copy.inquiryTypes.map((opt) => (
+                    <option value={opt.value}>{opt.label}</option>
+                  ))
+                }
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="contact-message">
+                {copy.fields.message}
+                <span class="form-required">{copy.fields.required}</span>
+              </label>
+              <textarea
+                id="contact-message"
+                name="message"
+                required
+                minlength="20"
+                maxlength="4000"
+                rows="8"
+                placeholder={copy.fields.messagePlaceholder}
+              />
+            </div>
+
+            <p class="form-privacy">{copy.privacy}</p>
+            <p class="form-autoreply-hint">{copy.formAutoreplyHint}</p>
+
+            <button type="submit" class="btn btn-primary contact-submit">
+              {copy.fields.submit}
+            </button>
+          </form>
+        )
+      }
+    </section>
+  </main>
+</div>
+
+<script is:inline>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('sent') !== '1') return;
+    var success = document.getElementById('contact-success');
+    var formSection = document.getElementById('contact-form-section');
+    if (success) success.hidden = false;
+    if (formSection) formSection.hidden = true;
+  })();
+</script>

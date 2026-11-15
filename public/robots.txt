@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /atelier/data/agents/
+
+Sitemap: https://eliora-studio.com/sitemap.xml

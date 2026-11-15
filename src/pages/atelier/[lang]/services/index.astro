@@ -1,0 +1,22 @@
+---
+import AtelierLayout from '../../../../site-layouts/AtelierLayout.astro';
+import AtelierServices from '../../../../components/atelier/AtelierServices.astro';
+import { atelierLanguages, type AtelierLang } from '../../../../data/atelier-copy';
+import { servicesPageCopy } from '../../../../data/services-page-copy';
+
+export function getStaticPaths() {
+  return atelierLanguages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: AtelierLang };
+const copy = servicesPageCopy[lang];
+---
+
+<AtelierLayout
+  title={copy.meta.title}
+  description={copy.meta.description}
+  lang={lang}
+  image={lang === "ja" ? "/atelier/assets/img/services/shindan-main.webp" : `/atelier/assets/img/services/${lang}/shindan-main.webp`}
+>
+  <AtelierServices lang={lang} copy={copy} />
+</AtelierLayout>
