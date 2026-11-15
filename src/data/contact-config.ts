@@ -1,34 +1,29 @@
 import type { AtelierLang } from './atelier-copy';
 
 /**
- * Web3Forms 送信設定
+ * お問い合わせフォームの送信先（Google Apps Script ウェブアプリ）
  *
- * ★ アクセスキーを入れる場所（ここ1か所）:
- *    下の WEB3FORMS_ACCESS_KEY_DEFAULT に Web3Forms の Access Key を設定済み（2026-10-31）。変更する場合はここを置き換える。
- *    または GitHub の Secret / Variable `WEB3FORMS_ACCESS_KEY` を設定する
- *    （deploy.yml がビルド時に PUBLIC_WEB3FORMS_ACCESS_KEY として渡す。Secret が優先）。
+ * ★ URL を入れる場所（ここ1か所）:
+ *    下の APPS_SCRIPT_URL を、デプロイしたウェブアプリの /exec URL に置き換える。
+ *    例: https://script.google.com/macros/s/XXXX/exec
  *
- * Access Key は公開前提の値（HTMLに出ます）。受信先メールは Web3Forms 側でキーに紐づけます。
- * 未設定（プレースホルダのまま）でもビルドは通りますが、警告を出します。送信は失敗します。
+ * プレースホルダのままだとフォームは「準備中」表示になり、送信されません。
+ * 切替前は Web3Forms を使っていました。URL を入れたあとに公開してください。
  */
-export const WEB3FORMS_KEY_PLACEHOLDER = 'WEB3FORMS_KEY_PENDING';
-const WEB3FORMS_ACCESS_KEY_DEFAULT = '67882b18-c2a0-4090-a722-cfd312cede61';
-const WEB3FORMS_ACCESS_KEY: string =
-  (import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY as string | undefined)?.trim() || WEB3FORMS_ACCESS_KEY_DEFAULT;
+export const APPS_SCRIPT_URL_PLACEHOLDER = 'APPS_SCRIPT_URL_PENDING';
+export const APPS_SCRIPT_URL: string =
+  (import.meta.env.PUBLIC_APPS_SCRIPT_URL as string | undefined)?.trim() ||
+  'https://script.google.com/macros/s/AKfycbzudWSfA3WgpwK_3Sk9gWtCw0GHe2Sn19OK7OwS9nVhC9kNkST8MNeuHhjys5fOp5An6A/exec';
 
-export const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
-
-export function isWeb3formsKeyPending(): boolean {
-  return WEB3FORMS_ACCESS_KEY === WEB3FORMS_KEY_PLACEHOLDER;
+export function isAppsScriptUrlPending(): boolean {
+  return !APPS_SCRIPT_URL || APPS_SCRIPT_URL === APPS_SCRIPT_URL_PLACEHOLDER;
 }
 
-if (isWeb3formsKeyPending() && !(globalThis as any).__w3fWarned) {
-  (globalThis as any).__w3fWarned = true;
-  console.warn('[contact] WEB3FORMS_ACCESS_KEY is still the placeholder (WEB3FORMS_KEY_PENDING): contact forms will not deliver until the key is set.');
-}
-
-export function getWeb3formsAccessKey(): string {
-  return WEB3FORMS_ACCESS_KEY;
+if (isAppsScriptUrlPending() && !(globalThis as any).__appsScriptWarned) {
+  (globalThis as any).__appsScriptWarned = true;
+  console.warn(
+    '[contact] APPS_SCRIPT_URL is still the placeholder (APPS_SCRIPT_URL_PENDING): contact forms will stay unavailable until the web app URL is set.'
+  );
 }
 
 export const CONTACT_SITE = 'https://eliora-studio.com';
@@ -38,12 +33,12 @@ export function atelierContactPath(lang: AtelierLang): string {
 }
 
 export function contactFormPostUrl(): string {
-  return WEB3FORMS_ENDPOINT;
+  return APPS_SCRIPT_URL;
 }
 
-/** Always true: the form is rendered even while the key is a placeholder (see warning above). */
+/** False while the Apps Script URL is still a placeholder. */
 export function isContactFormReady(): boolean {
-  return true;
+  return !isAppsScriptUrlPending();
 }
 
 export function contactFormPageUrl(lang: AtelierLang): string {
@@ -54,7 +49,7 @@ export function contactFormNext(lang: AtelierLang, path?: string): string {
   return `${path ? `${CONTACT_SITE}${path}` : contactFormPageUrl(lang)}?sent=1`;
 }
 
-/** Sender name shown by Web3Forms in the notification mail. */
+/** Sender name shown in the shop-side notification subject line. */
 export const CONTACT_FROM_NAME = 'Miragea · Eliora website';
 
 export function contactFormSubject(lang: AtelierLang): string {

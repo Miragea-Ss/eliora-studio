@@ -7,7 +7,6 @@ import {
   contactFormNext,
   contactFormPageUrl,
   contactFormSubject,
-  getWeb3formsAccessKey,
   CONTACT_FROM_NAME,
   atelierContactPath,
   isContactFormReady,
@@ -25,7 +24,6 @@ const postUrl = contactFormPostUrl();
 const nextUrl = contactFormNext(lang);
 const pageUrl = contactFormPageUrl(lang);
 const subject = contactFormSubject(lang);
-const accessKey = getWeb3formsAccessKey();
 const fromName = CONTACT_FROM_NAME;
 const homeCopy = atelierHomeCopy[lang];
 const homePath = `/atelier/${lang}/`;
@@ -82,11 +80,11 @@ const nav = [
             method="POST"
             accept-charset="UTF-8"
           >
-            <input type="hidden" name="access_key" value={accessKey} />
             <input type="hidden" name="subject" value={subject} />
             <input type="hidden" name="from_name" value={fromName} />
             <input type="hidden" name="redirect" value={nextUrl} />
             <input type="hidden" name="locale" value={lang} />
+            <input type="hidden" name="lang" value={lang} />
             <input
               type="checkbox"
               name="botcheck"
