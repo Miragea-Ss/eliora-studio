@@ -202,12 +202,6 @@
       },
       "events": [
         {
-          "at": "2026-07-07T13:30:00Z",
-          "type": "score",
-          "title": "High-VRAM workflow pack live — 5 ComfyUI JSON (48–96GB)",
-          "url": "/eliora/atelier/ja/#workflows"
-        },
-        {
           "at": "2026-07-07T04:00:00Z",
           "type": "score",
           "title": "ComfyUI batch pipeline → enterprise PoC candidate",

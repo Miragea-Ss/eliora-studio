@@ -148,6 +148,7 @@ export const atelierHomeCopy: Record<AtelierLang, AtelierHomeCopy> = {
       { href: '/atelier/en/atelier/', label: 'Atelier Ops' },
       { href: '#series', label: 'Series' },
       { href: '/atelier/en/services/', label: 'Services' },
+      { href: '/skills/', label: 'Skills & JSON' },
       { href: '/atelier/en/contact/', label: 'Contact' },
     ],
     regionTags,
@@ -300,6 +301,7 @@ export const atelierHomeCopy: Record<AtelierLang, AtelierHomeCopy> = {
       { href: '/atelier/ja/atelier/', label: 'アトリエ運用' },
       { href: '#learn', label: '講座' },
       { href: '/atelier/ja/services/', label: 'サービス' },
+      { href: '/skills/', label: 'スキル＆JSON' },
       { href: '/atelier/ja/contact/', label: 'お問い合わせ' },
     ],
     regionTags,
@@ -457,6 +459,7 @@ export const atelierHomeCopy: Record<AtelierLang, AtelierHomeCopy> = {
       { href: '/atelier/zh/atelier/', label: '工坊运作' },
       { href: '#bts', label: '制作解说' },
       { href: '/atelier/zh/services/', label: '服务' },
+      { href: '/skills/', label: '技能与 JSON' },
       { href: '/atelier/zh/contact/', label: '联系' },
     ],
     regionTags,
@@ -595,6 +598,7 @@ export const atelierHubCopy: Record<AtelierLang, AtelierHubCopy> = {
       { href: '/atelier/en/#studio', label: 'Studio' },
       { href: '/atelier/en/atelier/', label: 'Atelier Ops' },
       { href: '/atelier/en/services/', label: 'Services' },
+      { href: '/skills/', label: 'Skills & JSON' },
     ],
     staleBanner: 'Agent status may be stale.',
     hero: {
@@ -633,6 +637,7 @@ export const atelierHubCopy: Record<AtelierLang, AtelierHubCopy> = {
       { href: '/atelier/ja/#studio', label: 'スタジオ' },
       { href: '/atelier/ja/atelier/', label: 'アトリエ運用' },
       { href: '/atelier/ja/services/', label: 'サービス' },
+      { href: '/skills/', label: 'スキル＆JSON' },
     ],
     staleBanner: 'Agentステータスが古い可能性があります。',
     hero: {
@@ -670,6 +675,7 @@ export const atelierHubCopy: Record<AtelierLang, AtelierHubCopy> = {
       { href: '/atelier/zh/#studio', label: '工作室' },
       { href: '/atelier/zh/atelier/', label: '工坊运作' },
       { href: '/atelier/zh/services/', label: '服务' },
+      { href: '/skills/', label: '技能与 JSON' },
     ],
     staleBanner: 'Agent 状态可能已过期。',
     hero: {
